@@ -91,31 +91,6 @@
 			<key>CFG_USE_DPT</key>
 			<true/>
 		</dict>
-		<key>aty_properties</key>
-		<dict>
-			<key>DalForceSingleDispPipeSplit</key>
-			<integer>1</integer>
-			<key>PP_DisableVoltageIsland</key>
-			<integer>1</integer>
-			<key>PP_DriverEnableNBDPM</key>
-			<integer>1</integer>
-			<key>PP_GfxOffControl</key>
-			<integer>0</integer>
-			<key>PP_SclkDeepSleepDisable</key>
-			<integer>0</integer>
-			<key>PP_Sumo_DisableGfxPowerGatingInUVD</key>
-			<integer>0</integer>
-			<key>PP_ThermalAutoThrottlingEnable</key>
-			<integer>1</integer>
-			<key>PP_Falcon_QuickTransition_Enable</key>
-			<integer>0</integer>
-			<key>PP_PhmUseDummyBackEnd</key>
-			<integer>0</integer>
-			<key>PP_ToolsLogSpaceSize</key>
-			<integer>524288</integer>
-			<key>PP_WorkLoadPolicyMask</key>
-			<integer>4</integer>
-		</dict>
 	</dict>
 	<dict>
 		<key>CFBundleIdentifier</key>
@@ -156,6 +131,26 @@
 		<dict>
 			<key>DalForceSingleDispPipeSplit</key>
 			<integer>1</integer>
+			<key>PP_DisableVoltageIsland</key>
+			<integer>1</integer>
+			<key>PP_DriverEnableNBDPM</key>
+			<integer>1</integer>
+			<key>PP_GfxOffControl</key>
+			<integer>0</integer>
+			<key>PP_SclkDeepSleepDisable</key>
+			<integer>0</integer>
+			<key>PP_Sumo_DisableGfxPowerGatingInUVD</key>
+			<integer>0</integer>
+			<key>PP_ThermalAutoThrottlingEnable</key>
+			<integer>1</integer>
+			<key>PP_Falcon_QuickTransition_Enable</key>
+			<integer>0</integer>
+			<key>PP_PhmUseDummyBackEnd</key>
+			<integer>0</integer>
+			<key>PP_ToolsLogSpaceSize</key>
+			<integer>524288</integer>
+			<key>PP_WorkLoadPolicyMask</key>
+			<integer>4</integer>
 		</dict>
 	</dict>
 </array>
