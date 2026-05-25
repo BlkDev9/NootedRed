@@ -107,6 +107,14 @@
 			<integer>0</integer>
 			<key>PP_ThermalAutoThrottlingEnable</key>
 			<integer>1</integer>
+			<key>PP_Falcon_QuickTransition_Enable</key>
+			<integer>0</integer>
+			<key>PP_PhmUseDummyBackEnd</key>
+			<integer>0</integer>
+			<key>PP_ToolsLogSpaceSize</key>
+			<integer>524288</integer>
+			<key>PP_WorkLoadPolicyMask</key>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<dict>
