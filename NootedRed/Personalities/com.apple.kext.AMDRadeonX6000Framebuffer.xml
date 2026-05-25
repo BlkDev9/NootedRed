@@ -65,15 +65,15 @@
 				<key>PP_EnableUploadFirmware</key>
 				<integer>0</integer>
 				<key>PP_Falcon_QuickTransition_Enable</key>
-				<integer>0</integer>
-				<key>PP_GfxOffControl</key>
 				<integer>1</integer>
+				<key>PP_GfxOffControl</key>
+				<integer>0</integer>
 				<key>PP_PhmUseDummyBackEnd</key>
 				<integer>0</integer>
 				<key>PP_ToolsLogSpaceSize</key>
 				<integer>524288</integer>
 				<key>PP_WorkLoadPolicyMask</key>
-				<integer>4</integer>
+				<integer>16</integer>
 			</dict>
 	</dict>
 	<dict>
@@ -126,15 +126,15 @@
 				<key>PP_EnableUploadFirmware</key>
 				<integer>0</integer>
 				<key>PP_Falcon_QuickTransition_Enable</key>
-				<integer>0</integer>
-				<key>PP_GfxOffControl</key>
 				<integer>1</integer>
+				<key>PP_GfxOffControl</key>
+				<integer>0</integer>
 				<key>PP_PhmUseDummyBackEnd</key>
 				<integer>0</integer>
 				<key>PP_ToolsLogSpaceSize</key>
 				<integer>524288</integer>
 				<key>PP_WorkLoadPolicyMask</key>
-				<integer>4</integer>
+				<integer>16</integer>
 			</dict>
 	</dict>
 	<dict>
@@ -187,15 +187,15 @@
 				<key>PP_EnableUploadFirmware</key>
 				<integer>0</integer>
 				<key>PP_Falcon_QuickTransition_Enable</key>
-				<integer>0</integer>
-				<key>PP_GfxOffControl</key>
 				<integer>1</integer>
+				<key>PP_GfxOffControl</key>
+				<integer>0</integer>
 				<key>PP_PhmUseDummyBackEnd</key>
 				<integer>0</integer>
 				<key>PP_ToolsLogSpaceSize</key>
 				<integer>524288</integer>
 				<key>PP_WorkLoadPolicyMask</key>
-				<integer>4</integer>
+				<integer>16</integer>
 			</dict>
 	</dict>
 </array>
