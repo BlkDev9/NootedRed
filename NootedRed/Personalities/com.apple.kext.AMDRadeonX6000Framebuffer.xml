@@ -73,7 +73,7 @@
 				<key>PP_ToolsLogSpaceSize</key>
 				<integer>524288</integer>
 				<key>PP_WorkLoadPolicyMask</key>
-				<integer>0</integer>
+				<integer>4</integer>
 			</dict>
 	</dict>
 	<dict>
@@ -134,7 +134,7 @@
 				<key>PP_ToolsLogSpaceSize</key>
 				<integer>524288</integer>
 				<key>PP_WorkLoadPolicyMask</key>
-				<integer>0</integer>
+				<integer>4</integer>
 			</dict>
 	</dict>
 	<dict>
@@ -195,7 +195,7 @@
 				<key>PP_ToolsLogSpaceSize</key>
 				<integer>524288</integer>
 				<key>PP_WorkLoadPolicyMask</key>
-				<integer>0</integer>
+				<integer>4</integer>
 			</dict>
 	</dict>
 </array>
