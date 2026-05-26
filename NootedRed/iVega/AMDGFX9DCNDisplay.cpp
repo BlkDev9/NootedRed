@@ -214,6 +214,7 @@ bool AMDRadeonX5000_AMDGFX9DCNDisplay::fixedSuperGetDisplayInfo(const UInt32 fbI
         }
 
         IODisplayModeInformation modeInfo;
+        memset(&modeInfo, 0, sizeof(modeInfo));
         if (fb->getInformationForDisplayMode(displayMode, &modeInfo) == kIOReturnSuccess
             && (modeInfo.flags & kDisplayModeAcceleratorBackedFlag) != 0)
         {
@@ -222,6 +223,7 @@ bool AMDRadeonX5000_AMDGFX9DCNDisplay::fixedSuperGetDisplayInfo(const UInt32 fbI
         }
 
         IOTimingInformation timingInfo;
+        memset(&timingInfo, 0, sizeof(timingInfo));
         timingInfo.flags = kIODetailedTimingValid;
         if (fb->getTimingInfoForDisplayMode(displayMode, &timingInfo) == kIOReturnSuccess
             && (timingInfo.flags & kIODetailedTimingValid) != 0)
@@ -323,9 +325,10 @@ bool AMDRadeonX5000_AMDGFX9DCNDisplay::fixedSuperGetDisplayInfo(const UInt32 fbI
         surfInfoInput.format     = this->getHWInterface()->getHWAlignManager()->getAddrFormat(hwSpecificInfo.pixelMode);
         surfInfoInput.numSamples = 1;
         surfInfoInput.numSlices  = 1;
-        surfInfoInput.flags.display         = true;
-        surfInfoInput.swizzleMode           = surfInfoInput.format;         // TODO:
-        this->savedSwizzleModes()[fbIndex]  = surfInfoInput.swizzleMode;    // Use `Addr2GetPreferredSurfaceSetting`.
+        surfInfoInput.flags.display = true;
+        surfInfoInput.swizzleMode =
+            this->getHWInterface()->getHWAlignManager()->getPreferredSwizzleMode2(&surfInfoInput);
+        this->savedSwizzleModes()[fbIndex]  = surfInfoInput.swizzleMode;
         this->swizzleModes()[fbIndex]       = surfInfoInput.swizzleMode;
         this->savedResourceTypes()[fbIndex] = surfInfoInput.resourceType;
         if (this->getHWInterface()->getHWAlignManager()->getSurfaceInfo2(&surfInfoInput,
@@ -761,6 +764,8 @@ bool AMDRadeonX5000_AMDGFX9DCNDisplay::isFlipPending(AMDRadeonX5000_AMDGFX9DCNDi
 // No, no, there's no DCN1 option.
 AMDFlipOption AMDRadeonX5000_AMDGFX9DCNDisplay::getFlipOption() { return AMDFlipOption::DCN2; }
 
+UInt32 AMDRadeonX5000_AMDGFX9DCNDisplay::getNumberOfSupportedDisplays() { return MAX_SUPPORTED_DISPLAYS_RV; }
+
 #define setVFunc(_vft, _index, _func)                \
     {                                                \
         assert((_index) != INVALID_VT_INDEX);        \
@@ -793,6 +798,9 @@ void AMDRadeonX5000_AMDGFX9DCNDisplay::populateVFT(VFT& vft)
     setVFunc(vft, constants.setFlipControlRegisterVTIndex, setFlipControlRegister);
     setVFunc(vft, constants.writeFlipControlRegistersVTIndex, writeFlipControlRegisters);
     setVFunc(vft, constants.isFlipPendingVTIndex, isFlipPending);
+    if (currentKernelVersion() <= MACOS_10_14_X) {
+        setVFunc(vft, constants.getNumberOfSupportedDisplaysVTIndex, getNumberOfSupportedDisplays);
+    }
 }
 
 #undef setVFunc

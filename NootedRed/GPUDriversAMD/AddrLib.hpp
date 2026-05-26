@@ -65,6 +65,7 @@ union ADDR2_SURFACE_FLAGS
 
     UInt32 value{0};
 };
+static_assert(sizeof(ADDR2_SURFACE_FLAGS) == 4);
 
 enum AddrResourceType
 {
@@ -73,6 +74,7 @@ enum AddrResourceType
     ADDR_RSRC_TEX_3D   = 2,
     ADDR_RSRC_MAX_TYPE = 3,
 };
+static_assert(sizeof(AddrResourceType) == 4);
 
 struct ADDR2_COMPUTE_SURFACE_INFO_INPUT
 {
@@ -122,3 +124,62 @@ struct ADDR2_COMPUTE_SURFACE_INFO_OUTPUT
     UInt32 firstMipIdInTail{0};
 };
 static_assert(sizeof(ADDR2_COMPUTE_SURFACE_INFO_OUTPUT) == 0x80);
+
+union ADDR2_BLOCK_SET
+{
+    struct
+    {
+        UInt32 micro          : 1;
+        UInt32 macroThin4KB   : 1;
+        UInt32 macroThick4KB  : 1;
+        UInt32 macroThin64KB  : 1;
+        UInt32 macroThick64KB : 1;
+        UInt32 var            : 1;
+        UInt32                : 1;
+        UInt32 linear         : 1;
+        UInt32 reserved       : 24;
+    };
+    struct
+    {
+        UInt32            : 5;
+        UInt32 thin256KB  : 1;
+        UInt32 thick256KB : 1;
+        UInt32            : 25;
+    } gfx11;
+    UInt32 value{0};
+};
+
+struct ADDR2_GET_PREFERRED_SURF_SETTING_INPUT
+{
+    UInt32              size{sizeof(ADDR2_GET_PREFERRED_SURF_SETTING_INPUT)};
+    ADDR2_SURFACE_FLAGS flags;
+    AddrResourceType    resourceType{ADDR_RSRC_MAX_TYPE};
+    UInt32              format{0};
+    UInt32              resourceLocation{0};    // AMD had a typo here
+    ADDR2_BLOCK_SET     forbiddenBlock;
+    UInt32              preferredSwSet{0};
+    boolean_t           noXor{FALSE};
+    UInt32              bpp{0};
+    UInt32              width{0};
+    UInt32              height{0};
+    UInt32              numSlices{0};
+    UInt32              numMipLevels{0};
+    UInt32              numSamples{0};
+    UInt32              numFrags{0};
+    UInt32              maxAlign{0};
+    UInt32              minSizeAlign{0};
+};
+static_assert(sizeof(ADDR2_GET_PREFERRED_SURF_SETTING_INPUT) == 0x44);
+
+struct ADDR2_GET_PREFERRED_SURF_SETTING_OUTPUT
+{
+    UInt32          size{sizeof(ADDR2_GET_PREFERRED_SURF_SETTING_OUTPUT)};
+    UInt32          swizzleMode{0};
+    UInt32          resourceType{0};
+    ADDR2_BLOCK_SET validBlockSet;
+    boolean_t       canXor{FALSE};
+    UInt32          validSwTypeSet{0};
+    UInt32          clientPreferredSwSet{0};
+    UInt32          validSwModeSet{0};
+};
+static_assert(sizeof(ADDR2_GET_PREFERRED_SURF_SETTING_OUTPUT) == 0x20);
