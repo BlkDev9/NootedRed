@@ -53,6 +53,8 @@ IOService* iVega::AppleGFXHDA::wrapProbe(IOService* that, IOService* provider, S
         return FunctionCast(wrapProbe, singleton().orgProbe)(that, provider, score);
     }
 
+    WIOKit::renameDevice(dev, "HDAU");
+
     UInt8 bytes[] = {0x00};
     dev->setProperty("built-in", bytes, sizeof(bytes));
 
@@ -65,16 +67,22 @@ IOService* iVega::AppleGFXHDA::wrapProbe(IOService* that, IOService* provider, S
     singleton().controller.integratedCodecAddressMask(that) = 0x1;
     singleton().controller.codecAddressMask(that)           = 0x1;
     singleton().controller.useRirb(that)                    = true;
+    singleton().controller.timeIntervalFilterOrder(that)    = 9;
     singleton().controller.intIndex(that)                   = 1;
     singleton().controller.inputSampleLatency(that)         = 1;
     singleton().controller.outputSampleLatency(that)        = 1;
-    singleton().controller.inputSafetyOffset(that)          = 1;
-    singleton().controller.outputSafetyOffset(that)         = 1;
-    singleton().controller.inputSafetyOffsetLowPower(that)  = 1;
-    singleton().controller.outputSafetyOffsetLowPower(that) = 1;
+    singleton().controller.inputSafetyOffset(that)          = 0x28;
+    singleton().controller.outputSafetyOffset(that)         = 0x28;
+    singleton().controller.inputSafetyOffsetLowPower(that)  = 0x28;
+    singleton().controller.outputSafetyOffsetLowPower(that) = 0x28;
     singleton().controller.inputEntrySize(that)             = 0x3000;
     singleton().controller.outputEntrySize(that)            = 0x3000;
     singleton().controller.regAccessReady(that)             = true;
+
+    *score = 1;
+
+    char hdaGfxBytes[] = "onboard-1";
+    dev->setProperty("hda-gfx",  hdaGfxBytes, sizeof(hdaGfxBytes));
 
     DBGLOG("GFXHDA", "Initialised Raven or Renoir device.");
 
